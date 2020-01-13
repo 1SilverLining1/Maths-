@@ -1,0 +1,63 @@
+//https://practice.geeksforgeeks.org/problems/prime-factorization-and-geek-number/0/?fbclid=IwAR3RsG4Ad7Z-g8RtxBos7BFT7fdUucqy5ByUiG26_CRZPwQnQHO9hVZ5g28
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll ; 
+//Silver_Lining 
+ll SPF[ 1000001   ] ; 
+
+void sieve ()
+{
+    bool isPrime [ 1000001 ] ; 
+    for ( int i = 0 ; i < 1000001 ; i ++ )
+        isPrime [ i ] = 1 ; 
+        
+    SPF [ 1 ] = 1 ;   
+    for ( int i = 2 ; i * i < 1000001 ; i ++ )
+    {
+        if ( isPrime [ i ] == 1 )
+        {
+            SPF [ i ] = i ; 
+            for ( int j = i * 2 ; j < 1000001 ; j += i )
+            {
+                if ( isPrime [ j ] == 1)
+                {
+                    isPrime [ j ] = 0 ; 
+                    SPF [ j ] = i ; 
+                }
+            }
+        }
+    }
+    
+    for ( int i = 2 ; i < 1000001 ; i ++ )
+    {
+        if ( isPrime [ i ] )
+            SPF [ i ] = i ; 
+    }
+}
+int main() {
+    sieve() ; 
+    ll  T ; 
+    cin >> T ; 
+    
+    while ( T-- )
+    {
+        ll n , flag =1 ; 
+        cin >> n ; 
+        while ( n != 1 )
+        {
+            if ( SPF [ n ] == SPF [ n / SPF [ n ] ] )
+            {
+                flag = 0 ; 
+                break ; 
+                
+            }
+            n = n / SPF [ n ] ; 
+        }
+        if (flag == 0 )
+            cout << "No" << endl ; 
+        else
+            cout << "Yes" << endl ; 
+    }
+	//code
+	return 0;
+}
