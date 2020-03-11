@@ -1,0 +1,28 @@
+//https://leetcode.com/problems/rectangle-area/
+
+
+class Solution {
+public:
+    int computeArea(int A, int B, int C, int D, int E, int F, int G, int H) {
+        
+        
+        
+        if ( A > E )
+        {
+            swap ( A , E ) ; 
+            swap ( B , F ) ; 
+            swap ( C , G ) ; 
+            swap ( D , H ) ; 
+        }
+        
+       if ( F >= D or B >= H  or  E >= C or G <= A )
+            return abs ( A - C ) * abs ( D - B ) + abs ( E - G ) * abs ( H - F )  ; 
+        
+        int area1 =  abs ( A - C ) * abs ( D - B )  ; 
+        int area2 =  abs ( E - G ) * abs ( H - F )  ; 
+        int area3 =  abs ( max ( A , E ) - min ( C , G ) ) * abs ( max ( B , F ) - min ( D , H ) ) ; 
+        area1 = area1 - area3 ;
+        area1 = area1 + area2 ;
+        return area1 ;
+    }
+};
