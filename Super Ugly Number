@@ -1,0 +1,33 @@
+//https://leetcode.com/problems/count-primes/
+
+
+class Solution {
+public:
+    int nthUglyNumber(int n, int a, int b, int c) {
+        
+        
+                int dp [ n + 1 ] ; 
+                dp [ 0 ] = 1 ; 
+                int n2 , n3 , n5 ; 
+                n2 = n3 = n5 = 1 ; 
+                for ( int i = 1 ; i <= n ; i ++ )
+                {
+                    int mini = min (n2  * a , min ( n3 * b , n5 * c ) ) ; 
+                    dp [ i ] = mini ; 
+                    if ( mini == n2  * a )
+                        n2 ++ ; 
+
+                    if ( mini ==  n3 * b  )
+                        n3 ++ ; 
+
+                    if ( mini == n5 * c )
+                        n5 ++ ;
+                    cout << dp [i ] << " " ; 
+
+                }
+
+                return dp [ n ] ; 
+        
+        
+    }
+};
